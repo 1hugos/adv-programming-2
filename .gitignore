@@ -1,4 +1,9 @@
 data
+plate_dataset
+dataset
+yolov8n.pt
+runs
+evaluation_results
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
