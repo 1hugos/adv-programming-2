@@ -7,5 +7,6 @@ if __name__ == '__main__':
     results = model.train(
         data='plate_dataset.yaml',
         epochs=25,
-        imgsz=640
+        imgsz=640,
+        worker = 4
     )

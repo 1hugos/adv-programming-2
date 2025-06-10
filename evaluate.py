@@ -21,10 +21,12 @@ def calculate_iou(boxA, boxB):
     yA = max(boxA[1], boxB[1])
     xB = min(boxA[2], boxB[2])
     yB = min(boxA[3], boxB[3])
+
     interArea = max(0, xB - xA) * max(0, yB - yA)
     boxAArea = (boxA[2] - boxA[0]) * (boxA[3] - boxA[1])
     boxBArea = (boxB[2] - boxB[0]) * (boxB[3] - boxB[1])
     unionArea = float(boxAArea + boxBArea - interArea)
+
     return interArea / unionArea if unionArea != 0 else 0
 
 
@@ -38,7 +40,7 @@ def post_process_text(text: str) -> str:
     if len(cleaned_text) >= 8 and (cleaned_text[0].isdigit() or cleaned_text[0] == "I"):
         cleaned_text = cleaned_text[1:]
 
-    if len(cleaned_text) == 7:
+    if len(cleaned_text) == 7 or len(cleaned_text) == 8:
         correction_map = {"0": "O", "1": "I", "5": "S", "6": "G", "8": "B"}
         final_text = ""
         for i, char in enumerate(cleaned_text):
@@ -143,7 +145,6 @@ def calculate_final_grade(accuracy_percent: float, processing_time_sec: float) -
     return round(grade * 2) / 2
 
 
-# --- Główny blok ewaluacji ---
 if __name__ == "__main__":
     test_images_dir = "dataset/images/test"
     test_annotations_dir = "dataset/annotations/test"
